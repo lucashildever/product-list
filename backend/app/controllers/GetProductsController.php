@@ -2,8 +2,14 @@
 
 class GetProductsController
 {
+    private $dataBase;
+
+    public function __construct($db) {
+        $this->dataBase = $db;
+    }
+
     public function getAllProducts() {
-        echo 'todos os produtos';
+        $this->dataBase->queryProducts();
     }
 }
 

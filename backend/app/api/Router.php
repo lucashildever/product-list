@@ -4,27 +4,21 @@ class Router
 {
     private $routes = array();
 
-    // addRoute('GET', '/path', 'GetProductsController', 'getAllProducts');
-    public function addRoute($httpMethod, $path, $controller, $controllerMethod) {
-        $this->routes[] = [
-            'httpMethod' => $httpMethod,
-            'path' => $path,
-            'controller' => $controller,
-            'controllerMethod' => $controllerMethod
-        ];
+    public function addRoutes($routes) {
+        foreach($routes as $route) {
+            array_push($this->routes, $route);
+        }
     }
 
-    // o método http atual e o path atual
-    public function runRoute($httpMethod, $path) {
+    public function runRoutes($requestMethod, $pathInfo) {
         foreach($this->routes as $route) {
-            if($route['httpMethod'] == $httpMethod && $route['path'] == $path) {
-                $controller = new $route['controller']();
-                $controller->$route['controllerMethod']();
+            if($route['httpMethod'] == $requestMethod && $route['path'] == $pathInfo) {
+                $method = $route['controllerMethod'];
+                $route['controller']->$method();
                 return;
-            } else {
-                echo 'route not found';
+                }
             }
-        }
+        echo 'route not found';
     }
 }
 
