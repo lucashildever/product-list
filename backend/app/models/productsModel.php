@@ -31,8 +31,8 @@ abstract class ProductsModel
 
 class Dvd extends ProductsModel
 {
-    private $size;
     private $type = 'dvd';
+    private $size;
 
     public function __construct($sku, $name, $price, $size) {
         parent::__construct($sku, $name, $price);
@@ -50,8 +50,8 @@ class Dvd extends ProductsModel
 
 class Furniture extends ProductsModel
 {
-    private $dimensions;
     private $type = 'furniture';
+    private $dimensions;
 
     public function __construct($sku, $name, $price, $dimensions) {
         parent::__construct($sku, $name, $price);
@@ -69,8 +69,8 @@ class Furniture extends ProductsModel
 
 class Book extends ProductsModel
 {
-    private $weight;
     private $type = 'book';
+    private $weight;
 
     public function __construct($sku, $name, $price, $weight) {
         parent::__construct($name, $price);

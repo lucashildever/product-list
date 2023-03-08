@@ -18,7 +18,7 @@ class Router
                 return;
                 }
             }
-        echo 'route not found';
+        echo 'route not found.';
     }
 }
 

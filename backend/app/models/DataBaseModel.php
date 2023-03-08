@@ -40,8 +40,24 @@ class DataBaseModel
             $stmt->execute();
             echo 'Data inserted succesflully';
         } catch(PDOException $e) {
-            echo "error: " . $e->getMessage();
+            echo 'ERROR: ' . $e->getMessage();
         }
+    }
+
+    public function removeProducts() {
+        if($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+            $ids = $_REQUEST['ids'];
+        }
+
+        $stmt = $this->dataBase->prepare('DELETE FROM tb_products WHERE id IN (?)');
+        $stmt->bindParam(1, $ids);
+        $stmt->execute();
+
+        if ($stmt->rowCount() > 0) {
+            echo 'Data successfully deleted from database.';
+        } else {
+            echo 'No data has been deleted.';
+        }   
     }
 }
 
