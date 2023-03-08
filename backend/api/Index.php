@@ -1,7 +1,7 @@
 <?php 
 
     // db connection
-    $config = parse_ini_file('../../../../../db_config.ini', true);
+    $config = parse_ini_file('../../../../db_config.ini', true);
     
     $source = $config['database']['data_source'];
     $username = $config['database']['db_user'];
