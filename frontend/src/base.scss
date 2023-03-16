@@ -1,0 +1,43 @@
+@font-face {
+    font-family: 'latoblack';
+    src: url('../public/webfonts/lato-black-webfont.woff2') format('woff2'),
+         url('../public/webfonts/lato-black-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'latoregular';
+    src: url('../public/webfonts/lato-regular-webfont.woff2') format('woff2'),
+         url('../public/webfonts/lato-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'latohairline';
+    src: url('../public/webfonts/lato-thin-webfont.woff2') format('woff2'),
+         url('../public/webfonts/lato-thin-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+html {
+    font-size: 18px;
+}
+
+p {
+    font-family: 'latohairline';
+}
+
+h1 {
+    font-family: 'latoregular';
+}
+
+h2 {
+    font-family: 'latoregular';
+    font-size: 1rem;
+}

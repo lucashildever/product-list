@@ -1,9 +1,11 @@
-import React from 'react';
+import React from 'react'
+
+import AllProducts from '../components/product-list/AllProducts'
 
 const ProductsPage = () => {
     return (
-        <h1>Products Page</h1>
+        <AllProducts/>
     )
 }
 
-export default ProductsPage;
+export default ProductsPage

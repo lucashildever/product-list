@@ -9,7 +9,9 @@ class deleteProductsController
     }
 
     public function deleteProducts() {
-        $this->dataBase->removeProducts();
+        if($_SERVER['REQUEST_METHOD'] === 'PUT') {
+            $this->dataBase->removeProducts($_REQUEST['ids']);
+        }
     }
 }
 

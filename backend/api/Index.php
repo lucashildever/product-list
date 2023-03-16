@@ -1,5 +1,9 @@
 <?php 
 
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: GET, POST, PUT');
+    header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
     // db connection
     $config = parse_ini_file('../../../../db_config.ini', true);
     
@@ -27,17 +31,17 @@
 
     $routes = array([
         'httpMethod' => 'GET',
-        'path' => '/api/getproducts',
+        'path' => '/getproducts',
         'controller' => $getProducts,
         'controllerMethod' => 'getAllProducts'
     ],[
         'httpMethod' => 'POST',
-        'path' => '/api/addproduct',
+        'path' => '/addproduct',
         'controller' => $addProduct,
         'controllerMethod' => 'addProduct'
     ],[
-        'httpMethod' => 'DELETE',
-        'path' => '/api/deleteproducts',
+        'httpMethod' => 'PUT',
+        'path' => '/deleteproducts',
         'controller' => $deleteProducts,
         'controllerMethod' => 'deleteProducts'
     ]);

@@ -44,13 +44,10 @@ class DataBaseModel
         }
     }
 
-    public function removeProducts() {
-        if($_SERVER['REQUEST_METHOD'] === 'DELETE') {
-            $ids = $_REQUEST['ids'];
-        }
+    public function removeProducts($ids) {
 
-        $stmt = $this->dataBase->prepare('DELETE FROM tb_products WHERE id IN (?)');
-        $stmt->bindParam(1, $ids);
+        $str = 'DELETE FROM tb_products WHERE id IN (' . $ids . ')';
+        $stmt = $this->dataBase->prepare($str);
         $stmt->execute();
 
         if ($stmt->rowCount() > 0) {
