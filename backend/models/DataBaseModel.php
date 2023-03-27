@@ -14,7 +14,7 @@ class DataBaseModel
     }
 
     public function queryProducts() {
-        $stmt = $this->dataBase->prepare('SELECT * FROM tb_products');
+        $stmt = $this->dataBase->prepare('SELECT * FROM products');
         $stmt->execute();
         $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
         header('Content-Type: application/json');
@@ -28,7 +28,8 @@ class DataBaseModel
         $type = $productInstance->getType();
         $type_info = $productInstance->getTypeSpecificInfo();
 
-        $stmt = $this->dataBase->prepare('INSERT INTO tb_products (sku, name, price, type_info, type) VALUES (:sku, :name, :price, :type_info, :type)');
+        $stmt = $this->dataBase->prepare('INSERT INTO products (sku, name, price, type, type_info) 
+                                        VALUES (:sku, :name, :price, :type, :type_info)');
 
         $stmt->bindParam(':sku', $sku);
         $stmt->bindParam(':name', $name);
@@ -46,7 +47,7 @@ class DataBaseModel
 
     public function removeProducts($ids) {
 
-        $str = 'DELETE FROM tb_products WHERE id IN (' . $ids . ')';
+        $str = 'DELETE FROM products WHERE id IN (' . $ids . ')';
         $stmt = $this->dataBase->prepare($str);
         $stmt->execute();
 

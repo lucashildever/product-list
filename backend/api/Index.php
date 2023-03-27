@@ -1,11 +1,15 @@
 <?php 
 
-    header('Access-Control-Allow-Origin: *');
-    header('Access-Control-Allow-Methods: GET, POST, PUT');
-    header('Access-Control-Allow-Headers: Content-Type, Authorization');
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, POST, DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: *");
+
+    if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
+        exit;
+    }
 
     // db connection
-    $config = parse_ini_file('../../../../db_config.ini', true);
+    $config = parse_ini_file('../../../db_config.ini', true);
     
     $source = $config['database']['data_source'];
     $username = $config['database']['db_user'];
@@ -22,9 +26,6 @@
     require_once '../controllers/AddProductController.php';
     require_once '../controllers/DeleteProductsController.php';
 
-    $requestMethod = $_SERVER['REQUEST_METHOD'];
-    $pathInfo = $_SERVER['PATH_INFO'];
-
     $getProducts = new GetProductsController($db);
     $addProduct = new AddProductController($db);
     $deleteProducts = new deleteProductsController($db);
@@ -33,21 +34,38 @@
         'httpMethod' => 'GET',
         'path' => '/getproducts',
         'controller' => $getProducts,
-        'controllerMethod' => 'getAllProducts'
+        'controllerMethod' => 'getProducts'
     ],[
-        'httpMethod' => 'POST',
+        'httpMethod' => 'GET',
         'path' => '/addproduct',
         'controller' => $addProduct,
         'controllerMethod' => 'addProduct'
     ],[
-        'httpMethod' => 'PUT',
+        'httpMethod' => 'GET',
         'path' => '/deleteproducts',
         'controller' => $deleteProducts,
         'controllerMethod' => 'deleteProducts'
     ]);
+
+    // $routes = array([
+    //     'httpMethod' => 'GET',
+    //     'path' => '/getproducts',
+    //     'controller' => $getProducts,
+    //     'controllerMethod' => 'getProducts'
+    // ],[
+    //     'httpMethod' => 'POST',
+    //     'path' => '/addproduct',
+    //     'controller' => $addProduct,
+    //     'controllerMethod' => 'addProduct'
+    // ],[
+    //     'httpMethod' => 'DELETE',
+    //     'path' => '/deleteproducts',
+    //     'controller' => $deleteProducts,
+    //     'controllerMethod' => 'deleteProducts'
+    // ]);
     
     $router = new Router();
     $router->addRoutes($routes);
-    $router->runRoutes($requestMethod, $pathInfo);
+    $router->runRoutes();
 
 ?>

@@ -16,16 +16,25 @@ class AddProductController
     ];
 
     public function __construct($db) {
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        if($_SERVER['PATH_INFO'] == '/addproduct') {
             $this->data['dataBase'] = $db;
-            $this->data['sku'] = $_POST['sku'];
-            $this->data['name'] = $_POST['name'];
-            $this->data['price'] = $_POST['price'];
-            $this->data['type'] = $_POST['type'];
-            $this->data['type_info'] = $_POST['type_info'];
-            $this->data['requestMethod'] = 'POST';
-            
+            $this->data['sku'] = $_GET['sku'];
+            $this->data['name'] = $_GET['name'];
+            $this->data['price'] = $_GET['price'];
+            $this->data['type'] = $_GET['type'];
+            $this->data['type_info'] = $_GET['type_info'];
+            $this->data['requestMethod'] = 'GET';
         }
+        // if($_SERVER['REQUEST_METHOD'] === 'POST') {
+        //     $this->data['dataBase'] = $db;
+        //     $this->data['sku'] = $_POST['sku'];
+        //     $this->data['name'] = $_POST['name'];
+        //     $this->data['price'] = $_POST['price'];
+        //     $this->data['type'] = $_POST['type'];
+        //     $this->data['type_info'] = $_POST['type_info'];
+        //     $this->data['requestMethod'] = 'POST';
+            
+        // }
     }
 
     private function defineProductClass(){

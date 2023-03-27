@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 import HomeHeader from './header-content/HomeHeader'
 import AddProductHeader from './header-content/AddProductHeader'
 
-const Header = () => {
+const Header = ({ checkedCards, setCheckedCards, canAddProduct, setCanAddProduct, formData, setFormData }) => {
 
     const {headerContent, setHeaderContent} = useContext(GlobalState)
     const { pathname } = useLocation()
@@ -22,9 +22,17 @@ const Header = () => {
             {
                 headerContent === 'home' 
                 ?
-                <HomeHeader/> 
+                <HomeHeader 
+                    setCheckedCards={setCheckedCards}
+                    checkedCards={checkedCards}
+                /> 
                 :
-                <AddProductHeader/>
+                <AddProductHeader 
+                    canAddProduct={canAddProduct}
+                    setCanAddProduct={setCanAddProduct}
+                    formData={formData}
+                    setFormData={setFormData}
+                />
             }
         </header>
     )

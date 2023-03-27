@@ -73,7 +73,7 @@ class Book extends ProductsModel
     private $weight;
 
     public function __construct($sku, $name, $price, $weight) {
-        parent::__construct($name, $price);
+        parent::__construct($sku, $name, $price);
         $this->weight = $weight;
     }
 

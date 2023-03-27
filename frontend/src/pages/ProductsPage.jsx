@@ -2,9 +2,13 @@ import React from 'react'
 
 import AllProducts from '../components/product-list/AllProducts'
 
-const ProductsPage = () => {
+const ProductsPage = ({checkedCards, setCheckedCards}) => {
+
     return (
-        <AllProducts/>
+      <AllProducts
+          checkedCards={checkedCards}
+          setCheckedCards={setCheckedCards}
+      />
     )
 }
 

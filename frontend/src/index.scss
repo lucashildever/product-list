@@ -72,12 +72,16 @@ $shadow: 0px 12px 8px -3px rgba(0, 0, 0, 0.3);
   position: absolute;
   top: 20px;
   left: 43%;
-  transform: translateY(-200%);
-  @include formMessage;
+  opacity: 0;
+  transform: translateY(-100%);
+  font-style: italic;
+  font-size: 0.7rem;
+  color: red;
 }
 
 .delete-msg-active {
   transform: translateY(0%);
+  opacity: 1;
 }
 
 .save-btn {
@@ -202,6 +206,11 @@ $shadow: 0px 12px 8px -3px rgba(0, 0, 0, 0.3);
       }
     }
   }
+}
+
+#product_form div {
+  margin-top: 3px;
+  margin-bottom: 3px;
 }
 
 .form-div-message, 

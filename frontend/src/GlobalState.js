@@ -6,21 +6,7 @@ export const StateProvider = ({ children }) => {
 
   const [productsData, setProductsData] = useState()
   const [loading, setLoading] = useState(false)
-  const [formType, setFormType] = useState('select')
-  // const [checkedCards, setCheckedCards] = useState([])
   const [headerContent, setHeaderContent] = useState('home')
-  const [formData, setFormData] = useState({
-    sku: '',
-    name: '',
-    price: '',
-    type: 'select',
-    typeInfo: '',
-    size: '',
-    height: '',
-    width: '',
-    length: '',
-    weight: ''
-  })
   const [inputsMessages, setInputsMessages] = useState({
     formDiv: false,
     skuInput: false,
@@ -32,37 +18,60 @@ export const StateProvider = ({ children }) => {
     weightInput: false
   })
 
+  // coudn't configure webhost to accept other request methods than GET that's why it's not RESTful
   function fetchProducts() {
-    fetch('http://localhost/scandiweb/products-page/backend/api/index.php/getproducts')
+    const url = 'https://products-list-scandiweb.000webhostapp.com/backend/index1.php/getproducts'
+
+    fetch(url, {
+      method: 'GET',
+    })
       .then(function(response) {
-          return response.json();
+        return response.json()
       })
       .then(function(data) {
-          setProductsData(data)
+        setProductsData(data)
       })
-      .catch(function(e) {
-          console.log(e);
-      });
+      .catch(error => console.error(error))
   }
 
+  function deleteProducts(ids) {
+    const url = `https://products-list-scandiweb.000webhostapp.com/backend/index1.php/deleteproducts?ids=${ids}`
+
+    fetch(url,{
+      method: 'GET'
+    })
+      .then(response => {
+        fetchProducts()
+      })
+      .catch(error => console.error(error))
+  }
+
+  function addProduct(data) {
+    const url = `https://products-list-scandiweb.000webhostapp.com/backend/index1.php/addproduct?sku=${data.sku}&name=${data.name}&price=${data.price}&type=${data.type}&type_info=${data.type_info}`
+
+    fetch(url, {
+      method: 'GET'
+    })
+      .then(response => {
+        console.log(response)
+      })
+      .catch(error => console.error(error));
+  }
+  
   return (
     <GlobalState.Provider 
-      value={{ 
-        formType, 
-        setFormType, 
-        // checkedCards, 
-        //setCheckedCards,
+      value={{
         headerContent,
         setHeaderContent,
-        formData,
-        setFormData,
         productsData,
         setProductsData,
         inputsMessages,
         setInputsMessages,
-        fetchProducts,
         loading,
-        setLoading
+        setLoading,
+        fetchProducts,
+        deleteProducts,
+        addProduct
       }}
     >
       {children}

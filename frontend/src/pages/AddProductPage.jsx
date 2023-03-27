@@ -2,9 +2,13 @@ import React from 'react'
 
 import ProductForm from '../components/product-form/ProductForm'
 
-const AddProductPage = () => {
+const AddProductPage = ({ formData, setFormData, setCanAddProduct }) => {
     return (
-        <ProductForm />
+        <ProductForm 
+            formData={formData}
+            setFormData={setFormData}
+            setCanAddProduct={setCanAddProduct}
+        />
     )
 }
 

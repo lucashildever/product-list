@@ -5,10 +5,12 @@ class GetProductsController
     private $dataBase;
 
     public function __construct($db) {
-        $this->dataBase = $db;
+        if($_SERVER['PATH_INFO'] == '/getproducts') {
+            $this->dataBase = $db;
+        }
     }
 
-    public function getAllProducts() {
+    public function getProducts() {
         $this->dataBase->queryProducts();
     }
 }

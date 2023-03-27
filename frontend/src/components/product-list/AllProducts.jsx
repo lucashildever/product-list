@@ -1,18 +1,17 @@
-import { useEffect, useContext} from 'react'
+import { useEffect, useContext } from 'react'
 import { GlobalState } from '../../GlobalState'
 
 import ProductCard from './ProductCard'
 
-const AllProducts = () => {
+const AllProducts = ({ checkedCards, setCheckedCards }) => {
 
     const {productsData, fetchProducts} = useContext(GlobalState)
 
     useEffect(() => {
-        if(!productsData)
-            fetchProducts()
+        fetchProducts()
     // eslint-disable-next-line
     }, [])
-
+    
     return (
         <div className='all-products'>
             {
@@ -23,9 +22,12 @@ const AllProducts = () => {
                                 sku={item.sku}
                                 name={item.name}
                                 price={item.price}
-                                info={item.type_info}
+                                type={item.type}
+                                type_info={item.type_info}
                                 id={item.id}
                                 key={index}
+                                checkedCards={checkedCards}
+                                setCheckedCards={setCheckedCards}
                             />
                         )
                     })
@@ -33,7 +35,8 @@ const AllProducts = () => {
                 <h1>loading products...</h1>
             }
         </div>
-    )
+    ) 
+    
 }
 
 export default AllProducts

@@ -1,30 +1,20 @@
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import { GlobalState } from '../../../GlobalState'
 import { Link } from 'react-router-dom'
 
-const HomeHeader = () => {
+const HomeHeader = ({checkedCards, setCheckedCards}) => {
 
-    const {checkedCards, setCheckedCards, fetchProducts} = useContext(GlobalState)
+    const {deleteProducts} = useContext(GlobalState)
 
     const [deleteMsg, setDeleteMsg] = useState(false)
 
     function handleDelete() {
-        
         if(checkedCards.length > 0) {
             setDeleteMsg(false)
-
-            fetch(`http://localhost/scandiweb/products-page/backend/api/index.php/deleteproducts?ids=${checkedCards.join(',')}`, {
-                method: 'PUT'
-            })
-                .then(response => {
-                    fetchProducts()
-                    response.json()
-                })
-                .then(data => console.log(data))
-                .catch(error => console.error(error));
+            deleteProducts(checkedCards.join(','))
+            setCheckedCards([])
         } else {
             setDeleteMsg(true)
-            console.log('selecione algum item para deletar')
         }
     }
 
@@ -37,11 +27,11 @@ const HomeHeader = () => {
                     onClick={() => {
                         setDeleteMsg(false)
                         setCheckedCards([])
-                        }} 
+                        }}
                 >
-                    <button id='delete-product-btn'>Add</button>
+                    <button id='delete-product-btn'>ADD</button>
                 </Link>
-                <button onClick={handleDelete} id='delete-product-btn'>Mass delete</button>
+                <button onClick={handleDelete} id='delete-product-btn'>MASS DELETE</button>
             </div>
             <span className={`delete-msg ${deleteMsg ? 'delete-msg-active' : ''}`}>No products selected</span>
         </div>
